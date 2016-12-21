@@ -1,0 +1,3 @@
+set number of questions - done
+select two data types to be compared
+pick data type
