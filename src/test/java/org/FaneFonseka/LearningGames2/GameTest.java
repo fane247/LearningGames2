@@ -1,6 +1,5 @@
 package org.FaneFonseka.LearningGames2;
 
-import com.sun.openpisces.Stroker;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +33,7 @@ public class GameTest {
 
         user = new User();
 
-        game1 = new Game();
+        game1 = new Game(user);
 
         primitiveDataTypeStack = new Stack<PrimitiveDataType>();
         primitiveDataTypeStack.push(primitive6 = new PrimitiveDataType("float", 64));
@@ -77,32 +76,6 @@ public class GameTest {
 
     }
 
-    //todo move to Picker test
-    @Test
-    public void setFirstPickTest() {
-
-        game1.setPicks(fixedPrimitivePicker);
-
-        assert game1.getFirstPick().equals(primitive1);
-
-    }
-
-    //todo move to Picker test
-    @Test
-    public void setSecondPickTest() {
-
-        game1.setPicks(fixedPrimitivePicker);
-        assert game1.getSecondPick().equals(primitive3);
-    }
-
-    //todo move to Picker test
-    @Test
-    public void secondPickIsDifferentFromFirstPickTest() {
-
-        game1.setPicks(fixedPrimitivePicker);
-        assert !game1.getFirstPick().equals(game1.getSecondPick());
-
-    }
 
 
     @Test
@@ -133,7 +106,7 @@ public class GameTest {
                 return null;
             }
         };
-        game1.askAllQuestions(fakeUserAnswers,fixedPrimitivePicker,user, userInputNumberOfQuestions);
+        game1.askAllQuestions(fakeUserAnswers, fixedPrimitivePicker);
         assert user.getAnswersList().get(0);
 
     }
@@ -167,7 +140,7 @@ public class GameTest {
                 return null;
             }
         };
-        game1.askAllQuestions(fakeuserInput1,fixedPrimitivePicker,user, userInputNumberOfQuestions);
+        game1.askAllQuestions(fakeuserInput1, fixedPrimitivePicker);
         assert !user.getAnswersList().get(0);
 
     }

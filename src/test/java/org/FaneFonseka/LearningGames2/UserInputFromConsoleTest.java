@@ -12,6 +12,8 @@ public class UserInputFromConsoleTest {
     @Test
     public void whenNonIntIsEnteredInvalidInputMessageIsShown(){
 
+        //todo is there a way to test UserInputFromConsole() with a fake object?
+
         UserInput userInput= new UserInputFromConsole();
 
         userInput.getUserInputInt();

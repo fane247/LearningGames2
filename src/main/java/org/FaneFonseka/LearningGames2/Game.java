@@ -8,12 +8,13 @@ package org.FaneFonseka.LearningGames2;
 class Game {
 
 
+    private final Picks picks = new Picks();
     private int numberOfQuestions;
-    private PrimitiveDataType firstPick;
-    private PrimitiveDataType secondPick;
+    private User user;
 
-    Game() {
+    Game(User user) {
 
+        this.user = user;
     }
 
 
@@ -36,64 +37,7 @@ class Game {
     }
 
 
-    private void setFirstPick(Picker randomPrimitivePicker) {
-
-        this.firstPick = randomPrimitivePicker.pick();
-    }
-
-    PrimitiveDataType getFirstPick() {
-
-        return this.firstPick;
-    }
-
-
-    private void setSecondPick(Picker randomPrimitivePicker) {
-
-        PrimitiveDataType pick;
-
-        do {
-            pick = randomPrimitivePicker.pick();
-        }while(pick.equals(firstPick));
-
-        this.secondPick = pick;
-
-    }
-
-    PrimitiveDataType getSecondPick() {
-
-        return secondPick;
-    }
-
-
-    //todo could move picks into selectedPrimitives Class?
-    void setPicks(Picker randomPrimitivePicker) {
-        setFirstPick(randomPrimitivePicker);
-        setSecondPick(randomPrimitivePicker);
-    }
-
-    private boolean firstPickGreaterThanSecondPick(){
-
-        System.out.println(firstPick.getMemorySizeInBits() > secondPick.getMemorySizeInBits());
-        return firstPick.getMemorySizeInBits() > secondPick.getMemorySizeInBits();
-//todo add this test (Move to Picker class/interface?)
-    }
-
-    private boolean secondPickGreaterThanFirstPick(){
-
-        System.out.println(firstPick.getMemorySizeInBits() < secondPick.getMemorySizeInBits());
-        return firstPick.getMemorySizeInBits() < secondPick.getMemorySizeInBits();
-//todo add this test (Move to Picker class/interface?)
-    }
-
-    private boolean firstPickIsSameSizeAsSecondPick(){
-        System.out.println(firstPick.getMemorySizeInBits() == secondPick.getMemorySizeInBits());
-        return firstPick.getMemorySizeInBits() == secondPick.getMemorySizeInBits();
-//todo add this test (Move to Picker class/interface?)
-    }
-
-
-
-    void getAnswer(UserInput answerAsInt, Picker randomPrimitivePicker, User user) {
+    private void getAnswer(UserInput answerAsInt, Picker randomPrimitivePicker) {
 
         whichPickIsBiggerPrompt(randomPrimitivePicker);
 
@@ -104,13 +48,13 @@ class Game {
         switch (answerAsInt.getUserInputInt()) {
 
             case 1:
-                user.addAnswerToList(firstPickGreaterThanSecondPick());
+                user.addAnswerToList(picks.firstPickGreaterThanSecondPick());
                 break;
             case 2:
-                user.addAnswerToList(secondPickGreaterThanFirstPick());
+                user.addAnswerToList(picks.secondPickGreaterThanFirstPick());
                 break;
             case 3:
-                user.addAnswerToList(firstPickIsSameSizeAsSecondPick());
+                user.addAnswerToList(picks.firstPickIsSameSizeAsSecondPick());
                 break;
             default:
                 System.out.println(false);
@@ -121,26 +65,26 @@ class Game {
     }
 
     private void whichPickIsBiggerPrompt(Picker randomPrimitivePicker) {
-        setPicks(randomPrimitivePicker);
+        picks.setPicks(randomPrimitivePicker);
         System.out.println("Which is bigger?");
-        System.out.println("1. " + firstPick.name+"?");
-        System.out.println("2. " + secondPick.name+"?");
+        System.out.println("1. " + picks.getFirstPick().name + "?");
+        System.out.println("2. " + picks.getSecondPick().name + "?");
         System.out.println("3. " + "Both the same?");
     }
 
 
-    void askAllQuestions(UserInput userInputAnswers, Picker randomPrimitivePicker, User user, UserInput userInputNumberOfQuestions) {
+    void askAllQuestions(UserInput userInput, Picker randomPrimitivePicker) {
 
         //todo long parameter list
 
-        setNumberOfQuestions(userInputNumberOfQuestions);
+        setNumberOfQuestions(userInput);
         System.out.println("Let's Begin!");
         System.out.println();
         System.out.println("Enter your answer as a number");
 
         //questionsAskedCount+=;
         for (int i = 0; i <= numberOfQuestions-1; i++) {
-            getAnswer(userInputAnswers, randomPrimitivePicker, user);
+            getAnswer(userInput, randomPrimitivePicker);
         }
     }
 
@@ -151,10 +95,10 @@ class Game {
         User user = new User();
         user.setName(userInput);
 
-        Game game1 = new Game();
+        Game game1 = new Game(user);
         Picker randomPrimitivePicker = new RandomPrimitivePicker();
 
-        game1.askAllQuestions(userInput,randomPrimitivePicker,user, userInput);
+        game1.askAllQuestions(userInput, randomPrimitivePicker);
         System.out.println("Your score is " + user.getScore(game1.getNumberOfQuestions()));
         System.out.println("Thanks For playing!");
 

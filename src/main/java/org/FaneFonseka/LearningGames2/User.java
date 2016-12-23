@@ -25,8 +25,6 @@ class User {
     }
 
 
-
-
     double getScore(double numberOfQuestions) {
 
         int numberOfTrue = Collections.frequency(answersList,true);

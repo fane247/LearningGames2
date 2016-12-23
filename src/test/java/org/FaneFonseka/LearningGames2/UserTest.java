@@ -29,7 +29,7 @@ public class UserTest {
         user = new User();
         user.getAnswersList().add(true);
 
-        game = new Game();
+        game = new Game(user);
 
         primitiveDataTypeStack = new Stack<PrimitiveDataType>();
         primitiveDataTypeStack.push(primitive6 = new PrimitiveDataType("float", 64));
@@ -67,7 +67,7 @@ public class UserTest {
 
         double numberOfQuestions = 3;
 
-        assert (user.getScore(numberOfQuestions)) == 0.5;
+        assert (user.getScore(numberOfQuestions)) == 0.33;
 
     }
 
@@ -118,6 +118,7 @@ public class UserTest {
 
     }
 
+
     @Test
     public void multipleAnswersAreRecordedInUsersAnswersList(){
         UserInput userInputNumberOfQuestions =new UserInput() {
@@ -148,8 +149,9 @@ public class UserTest {
             }
         };
 
-        game.askAllQuestions(fakeUserInput,fixedPrimitivePicker,user, userInputNumberOfQuestions);
+        game.askAllQuestions(fakeUserInput, fixedPrimitivePicker);
         assert user.getAnswersList().size()==3;
+
 
     }
 
