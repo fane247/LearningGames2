@@ -1,6 +1,7 @@
 package org.FaneFonseka.LearningGames2;
 
-import javax.print.DocFlavor;
+import java.io.InputStream;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -8,28 +9,24 @@ import java.util.Scanner;
  */
 public class UserInputFromConsole implements UserInput {
 
-    private Scanner reader = new Scanner(System.in);
+    private Scanner reader;
 
-    @Override
-    public int getUserInputInt() {
-
-        while (true) {
-            try {
-                return reader.nextInt();
-
-
-            } catch (Exception e) {
-
-                System.out.println("not a valid number");
-
-            }
-        }
-
+    UserInputFromConsole(InputStream in) {
+        reader = new Scanner(in);
 
     }
 
     @Override
+    public int getUserInputInt() throws InputMismatchException {
+        //todo not sure how to test this
+        return reader.nextInt();
+
+    }
+
+
+    @Override
     public String getUserInputString() {
+        //todo not sure how to test this
 
         return reader.nextLine();
     }

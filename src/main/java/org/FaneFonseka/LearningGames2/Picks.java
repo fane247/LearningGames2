@@ -3,9 +3,12 @@ package org.FaneFonseka.LearningGames2;
 class Picks {
     private PrimitiveDataType firstPick;
     private PrimitiveDataType secondPick;
+    private Picker randomPrimitivePicker;
 
-    Picks() {
+    Picks(Picker randomPrimitivePicker) {
+        this.randomPrimitivePicker = randomPrimitivePicker;
     }
+
 
     private void setFirstPick(Picker randomPrimitivePicker) {
 
@@ -34,7 +37,7 @@ class Picks {
         return secondPick;
     }
 
-    void setPicks(Picker randomPrimitivePicker) {
+    void setPicks() {
         setFirstPick(randomPrimitivePicker);
         setSecondPick(randomPrimitivePicker);
     }

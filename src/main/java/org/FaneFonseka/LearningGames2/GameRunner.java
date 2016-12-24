@@ -1,26 +1,27 @@
 package org.FaneFonseka.LearningGames2;
 
 
+import java.io.InputStream;
+import java.util.InputMismatchException;
 
 /**
  * Created by Fane on 03/12/2016.
  */
-class Game {
+class GameRunner {
 
 
-    private final Picks picks = new Picks();
+    private final Picks picks;
     private int numberOfQuestions;
     private User user;
 
-    Game(User user) {
+    GameRunner(User user, Picker randomPrimitivePicker) {
 
         this.user = user;
+        picks = new Picks(randomPrimitivePicker);
     }
 
 
-    void setNumberOfQuestions(int numberOfQuestions) {
-        this.numberOfQuestions= numberOfQuestions;
-    }
+
 
     void setNumberOfQuestions(UserInput userInput) {
 
@@ -37,15 +38,25 @@ class Game {
     }
 
 
-    private void getAnswer(UserInput answerAsInt, Picker randomPrimitivePicker) {
+    private void getAnswer(UserInput answerAsInt) {
+        picks.setPicks();
 
-        whichPickIsBiggerPrompt(randomPrimitivePicker);
+        int answerNumber = 0;
 
-        /*
-        method might be getting too big. could possibly have it return and array of answers to allow for a swap in
-        implementation?
-        */
-        switch (answerAsInt.getUserInputInt()) {
+        boolean isValidNumber = true;
+
+        while (isValidNumber) {
+            whichPickIsBiggerPrompt();
+            try {
+                answerNumber = answerAsInt.getUserInputInt();
+                isValidNumber = false;
+            } catch (InputMismatchException e) {
+
+                System.out.println("Not valid number");
+            }
+        }
+
+        switch (answerNumber) {
 
             case 1:
                 user.addAnswerToList(picks.firstPickGreaterThanSecondPick());
@@ -64,8 +75,7 @@ class Game {
 
     }
 
-    private void whichPickIsBiggerPrompt(Picker randomPrimitivePicker) {
-        picks.setPicks(randomPrimitivePicker);
+    private void whichPickIsBiggerPrompt() {
         System.out.println("Which is bigger?");
         System.out.println("1. " + picks.getFirstPick().name + "?");
         System.out.println("2. " + picks.getSecondPick().name + "?");
@@ -73,9 +83,8 @@ class Game {
     }
 
 
-    void askAllQuestions(UserInput userInput, Picker randomPrimitivePicker) {
+    void askAllQuestions(UserInput userInput) {
 
-        //todo long parameter list
 
         setNumberOfQuestions(userInput);
         System.out.println("Let's Begin!");
@@ -84,21 +93,23 @@ class Game {
 
         //questionsAskedCount+=;
         for (int i = 0; i <= numberOfQuestions-1; i++) {
-            getAnswer(userInput, randomPrimitivePicker);
+            getAnswer(userInput);
         }
     }
 
     public static void main(String args[]){
 
         System.out.println("Welcome to the Java primitive data types quiz!");
-        UserInput userInput = new UserInputFromConsole();
+        InputStream in = System.in;
+        UserInput userInput = new UserInputFromConsole(in);
         User user = new User();
+
+
         user.setName(userInput);
-
-        Game game1 = new Game(user);
         Picker randomPrimitivePicker = new RandomPrimitivePicker();
+        GameRunner game1 = new GameRunner(user, randomPrimitivePicker);
 
-        game1.askAllQuestions(userInput, randomPrimitivePicker);
+        game1.askAllQuestions(userInput);
         System.out.println("Your score is " + user.getScore(game1.getNumberOfQuestions()));
         System.out.println("Thanks For playing!");
 

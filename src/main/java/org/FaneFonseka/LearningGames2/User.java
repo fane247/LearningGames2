@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+
 /**
  * Created by Fane on 06/12/2016.
  */
@@ -31,7 +32,11 @@ class User {
 
         System.out.println("(score is calculated by dividing true answers by number of questions)");
         System.out.println(numberOfTrue + "/" + (int)numberOfQuestions);
-        return numberOfTrue/numberOfQuestions;
+
+
+        double score = numberOfTrue / numberOfQuestions;
+        System.out.println(Math.round(score * 100) / 100);
+        return Math.round(score * 100.0) / 100.0;
     }
 
 

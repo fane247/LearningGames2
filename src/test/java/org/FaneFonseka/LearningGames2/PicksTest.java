@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.Stack;
 
-import static org.junit.Assert.*;
 
 /**
  * Created by Fane on 23/12/2016.
@@ -23,7 +22,6 @@ public class PicksTest {
     @Before
     public void setup() {
 
-        picks = new Picks();
 
         primitiveDataTypeStack = new Stack<PrimitiveDataType>();
         primitiveDataTypeStack.push(primitive3 = new PrimitiveDataType("int", 32));
@@ -38,13 +36,14 @@ public class PicksTest {
 
             }
         };
+        picks = new Picks(fixedPrimitivePicker);
 
     }
 
     @Test
     public void setFirstPickTest() {
 
-        picks.setPicks(fixedPrimitivePicker);
+        picks.setPicks();
 
         assert picks.getFirstPick().equals(primitive1);
 
@@ -54,14 +53,14 @@ public class PicksTest {
     @Test
     public void setSecondPickTest() {
 
-        picks.setPicks(fixedPrimitivePicker);
+        picks.setPicks();
         assert picks.getSecondPick().equals(primitive3);
     }
 
     @Test
     public void secondPickIsDifferentFromFirstPickTest() {
 
-        picks.setPicks(fixedPrimitivePicker);
+        picks.setPicks();
         assert !picks.getFirstPick().equals(picks.getSecondPick());
 
     }

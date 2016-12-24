@@ -12,7 +12,7 @@ import java.util.Stack;
 public class UserTest {
 
     private User user;
-    private Game game;
+    private GameRunner gameRunner;
     private Stack<PrimitiveDataType> primitiveDataTypeStack;
     private PrimitiveDataType primitive1;
     private PrimitiveDataType primitive2;
@@ -29,7 +29,6 @@ public class UserTest {
         user = new User();
         user.getAnswersList().add(true);
 
-        game = new Game(user);
 
         primitiveDataTypeStack = new Stack<PrimitiveDataType>();
         primitiveDataTypeStack.push(primitive6 = new PrimitiveDataType("float", 64));
@@ -48,6 +47,7 @@ public class UserTest {
 
             }
         };
+        gameRunner = new GameRunner(user, fixedPrimitivePicker);
 
 
     }
@@ -72,7 +72,7 @@ public class UserTest {
     }
 
     @Test
-    public void whenPromptedNameIsSet() throws IllegalUserInputException {
+    public void whenPromptedNameIsSet() {
 
         UserInput userInput = new UserInput() {
             @Override
@@ -94,7 +94,7 @@ public class UserTest {
 
 
     @Test
-    public void whenEmptyStringIsGivenAsNameItAsksForItAgain() throws IllegalUserInputException {
+    public void whenEmptyStringIsGivenAsNameItAsksForItAgain() {
                 final Stack<String> userInputs = new Stack<String>();
                 userInputs.push("Fane");
                 userInputs.push("");
@@ -121,25 +121,16 @@ public class UserTest {
 
     @Test
     public void multipleAnswersAreRecordedInUsersAnswersList(){
-        UserInput userInputNumberOfQuestions =new UserInput() {
-            @Override
-            public int getUserInputInt() {
-                return 3;
-            }
-
-            @Override
-            public String getUserInputString() {
-                return null;
-            }
-        };
 
         final Stack<Integer> testIntInput = new Stack<Integer>();
         testIntInput.add(1);
         testIntInput.add(1);
-        testIntInput.add(1);
+        testIntInput.add(2);
         UserInput fakeUserInput = new UserInput() {
             @Override
             public int getUserInputInt() {
+
+                System.out.println("int popped!");
                 return testIntInput.pop();
             }
 
@@ -149,7 +140,7 @@ public class UserTest {
             }
         };
 
-        game.askAllQuestions(fakeUserInput, fixedPrimitivePicker);
+        gameRunner.askAllQuestions(fakeUserInput);
         assert user.getAnswersList().size()==3;
 
 
