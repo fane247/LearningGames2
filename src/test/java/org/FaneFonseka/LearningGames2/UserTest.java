@@ -27,7 +27,7 @@ public class UserTest {
 
 
         user = new User();
-        user.getAnswersList().add(true);
+        user.addAnswerToList(true);
 
 
         primitiveDataTypeStack = new Stack<PrimitiveDataType>();

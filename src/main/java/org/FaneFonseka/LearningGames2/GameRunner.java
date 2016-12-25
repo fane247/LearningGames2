@@ -21,22 +21,19 @@ class GameRunner {
     }
 
 
+    void askAllQuestions(UserInput userInput) {
 
 
-    void setNumberOfQuestions(UserInput userInput) {
+        setNumberOfQuestions(userInput);
+        System.out.println("Let's Begin!");
+        System.out.println();
+        System.out.println("Enter your answer as a number");
 
-        System.out.println("How many questions would you like?");
-        this.numberOfQuestions = userInput.getUserInputInt();
-        System.out.println("ok");
-
+        //questionsAskedCount+=;
+        for (int i = 0; i <= numberOfQuestions - 1; i++) {
+            getAnswer(userInput);
+        }
     }
-
-
-    int getNumberOfQuestions() {
-
-        return this.numberOfQuestions;
-    }
-
 
     private void getAnswer(UserInput answerAsInt) {
         picks.setPicks();
@@ -75,6 +72,20 @@ class GameRunner {
 
     }
 
+    void setNumberOfQuestions(UserInput userInput) {
+
+        System.out.println("How many questions would you like?");
+        this.numberOfQuestions = userInput.getUserInputInt();
+        System.out.println("ok");
+
+    }
+
+
+    int getNumberOfQuestions() {
+
+        return this.numberOfQuestions;
+    }
+
     private void whichPickIsBiggerPrompt() {
         System.out.println("Which is bigger?");
         System.out.println("1. " + picks.getFirstPick().name + "?");
@@ -83,21 +94,7 @@ class GameRunner {
     }
 
 
-    void askAllQuestions(UserInput userInput) {
-
-
-        setNumberOfQuestions(userInput);
-        System.out.println("Let's Begin!");
-        System.out.println();
-        System.out.println("Enter your answer as a number");
-
-        //questionsAskedCount+=;
-        for (int i = 0; i <= numberOfQuestions-1; i++) {
-            getAnswer(userInput);
-        }
-    }
-
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         System.out.println("Welcome to the Java primitive data types quiz!");
         InputStream in = System.in;
@@ -117,6 +114,5 @@ class GameRunner {
     }
 
 
-
- }
+}
 

@@ -9,6 +9,28 @@ class Picks {
         this.randomPrimitivePicker = randomPrimitivePicker;
     }
 
+    boolean firstPickGreaterThanSecondPick() {
+
+        System.out.println(getFirstPick().getMemorySizeInBits() > getSecondPick().getMemorySizeInBits());
+        return getFirstPick().getMemorySizeInBits() > getSecondPick().getMemorySizeInBits();
+    }
+
+    boolean secondPickGreaterThanFirstPick() {
+
+        System.out.println(getFirstPick().getMemorySizeInBits() < getSecondPick().getMemorySizeInBits());
+        return getFirstPick().getMemorySizeInBits() < getSecondPick().getMemorySizeInBits();
+    }
+
+    boolean firstPickIsSameSizeAsSecondPick() {
+        System.out.println(getFirstPick().getMemorySizeInBits() == getSecondPick().getMemorySizeInBits());
+        return getFirstPick().getMemorySizeInBits() == getSecondPick().getMemorySizeInBits();
+    }
+
+    void setPicks() {
+        setFirstPick(randomPrimitivePicker);
+        setSecondPick(randomPrimitivePicker);
+
+    }
 
     private void setFirstPick(Picker randomPrimitivePicker) {
 
@@ -37,26 +59,5 @@ class Picks {
         return secondPick;
     }
 
-    void setPicks() {
-        setFirstPick(randomPrimitivePicker);
-        setSecondPick(randomPrimitivePicker);
-    }
-
-    boolean firstPickGreaterThanSecondPick() {
-
-        System.out.println(getFirstPick().getMemorySizeInBits() > getSecondPick().getMemorySizeInBits());
-        return getFirstPick().getMemorySizeInBits() > getSecondPick().getMemorySizeInBits();
-    }
-
-    boolean secondPickGreaterThanFirstPick() {
-
-        System.out.println(getFirstPick().getMemorySizeInBits() < getSecondPick().getMemorySizeInBits());
-        return getFirstPick().getMemorySizeInBits() < getSecondPick().getMemorySizeInBits();
-    }
-
-    boolean firstPickIsSameSizeAsSecondPick() {
-        System.out.println(getFirstPick().getMemorySizeInBits() == getSecondPick().getMemorySizeInBits());
-        return getFirstPick().getMemorySizeInBits() == getSecondPick().getMemorySizeInBits();
-    }
 
 }

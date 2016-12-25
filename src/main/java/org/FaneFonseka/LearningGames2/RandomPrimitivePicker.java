@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Created by Fane on 04/12/2016.
  */
-public class RandomPrimitivePicker implements Picker{
+public class RandomPrimitivePicker implements Picker {
 
 
     private static final PrimitiveDataType BOOLEAN_TYPE = new PrimitiveDataType("boolean", 0);
@@ -24,15 +24,12 @@ public class RandomPrimitivePicker implements Picker{
             LONG_TYPE, FLOAT_TYPE, DOUBLE_TYPE);
 
 
+    private Random randomNumberGenerator;
 
+    RandomPrimitivePicker() {
 
-    private Random randomNumberGenerator = new Random();
-
-    RandomPrimitivePicker(){
-
-        this.randomNumberGenerator = randomNumberGenerator;
+        randomNumberGenerator = new Random();
     }
-
 
 
     public PrimitiveDataType pick() {

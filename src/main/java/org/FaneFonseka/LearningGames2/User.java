@@ -11,27 +11,25 @@ import java.util.List;
 class User {
 
     private String name;
-
-    List<Boolean> getAnswersList() {
-        return answersList;
-    }
-
     private List<Boolean> answersList = new ArrayList<Boolean>();
 
+    void addAnswerToList(boolean answer) {
 
+        getAnswersList().add(answer);
+    }
 
-    String getName() {
+    List<Boolean> getAnswersList() {
 
-        return name;
+        return answersList;
     }
 
 
     double getScore(double numberOfQuestions) {
 
-        int numberOfTrue = Collections.frequency(answersList,true);
+        int numberOfTrue = Collections.frequency(answersList, true);
 
         System.out.println("(score is calculated by dividing true answers by number of questions)");
-        System.out.println(numberOfTrue + "/" + (int)numberOfQuestions);
+        System.out.println(numberOfTrue + "/" + (int) numberOfQuestions);
 
 
         double score = numberOfTrue / numberOfQuestions;
@@ -51,18 +49,17 @@ class User {
 
             if (this.name.isEmpty()) {
                 System.out.println("Please choose a valid name");
-            }else {
-                validName=false;
-                System.out.println("hello "+ this.name);
+            } else {
+                validName = false;
+                System.out.println("hello " + this.name);
             }
 
         }
     }
 
-    void addAnswerToList(boolean answer) {
+    String getName() {
 
-        getAnswersList().add(answer);
-//todo create test for addAnswerToList()
+        return name;
     }
 
 
